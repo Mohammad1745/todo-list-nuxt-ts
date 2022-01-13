@@ -1,0 +1,48 @@
+export const state = () => ({
+  links: [
+    {name: 'Home', path: '/', active: true},
+    {name: 'About', path: '/about', active: false}
+  ],
+  todos: [
+    {id: 1, text: 'Task 1', done: true},
+    {id: 2, text: 'Task 2', done: false},
+  ]
+})
+export const getters = {
+  allTodos: (state: any) =>  state.todos
+}
+
+export const actions = {
+  addTodo ({state, commit}, text: string):void {
+    let id:number = state.todos.length
+      ? parseInt(state.todos[state.todos.length-1].id) + 1
+      : 0
+    commit('ADD_TODO', {
+      id,
+      text,
+      done:false
+    })
+  },
+  toggleTodo ({commit}, id: number):void {
+    commit('TOGGLE_TODO', id)
+  },
+  deleteTodo ({commit}, todo: {}):void {
+    commit('DELETE_TODO', todo)
+  }
+}
+export const mutations = {
+  ADD_TODO (state: any, todo: {}) :void {
+    state.todos.push(todo)
+  },
+  TOGGLE_TODO (state: any, id: number) :void {
+    state.todos.map((todo: any) =>{
+      if (todo.id === id) {
+        todo.done = !todo.done
+      }
+    })
+  },
+  DELETE_TODO (state: any, todo: {}) :void {
+    let index: number= state.todos.indexOf(todo)
+    state.todos.splice(index, 1)
+  },
+}
