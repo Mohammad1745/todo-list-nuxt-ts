@@ -1,5 +1,7 @@
 # nuxt-ts-todos
 
+APP: https://nuxt-ts-todo-app.netlify.app/
+
 ## Build Setup
 
 ```bash
